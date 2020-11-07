@@ -1,0 +1,796 @@
+@prefix : <http://www.sementicweb.org/bank_ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.sementicweb.org/bank_ontology> .
+
+<http://www.sementicweb.org/bank_ontology> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.sementicweb.org/bank_ontology#hasAccount
+:hasAccount rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :hasBankingActivity ;
+            owl:inverseOf :isAccountOf ;
+            rdfs:domain :Bank ;
+            rdfs:range :Account .
+
+
+###  http://www.sementicweb.org/bank_ontology#hasBankType
+:hasBankType rdf:type owl:ObjectProperty ;
+             owl:inverseOf :isBankTypeOf ;
+             rdfs:domain :Bank ;
+             rdfs:range :BankType .
+
+
+###  http://www.sementicweb.org/bank_ontology#hasBankingActivity
+:hasBankingActivity rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    owl:inverseOf :isBankingActivityOf ;
+                    rdfs:domain :Bank ;
+                    rdfs:range :Account ,
+                               :ElectronicCard ,
+                               :Service .
+
+
+###  http://www.sementicweb.org/bank_ontology#hasCustomer
+:hasCustomer rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :hasPerson ;
+             owl:inverseOf :isCustomerOf ;
+             rdfs:domain :Bank ;
+             rdfs:range :Customer .
+
+
+###  http://www.sementicweb.org/bank_ontology#hasElectronicCard
+:hasElectronicCard rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :hasBankingActivity ;
+                   owl:inverseOf :isElectronicCardOf ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain :Bank ;
+                   rdfs:range :ElectronicCard .
+
+
+###  http://www.sementicweb.org/bank_ontology#hasPerson
+:hasPerson rdf:type owl:ObjectProperty ;
+           owl:inverseOf :isPersonOf ;
+           rdfs:domain :Bank ;
+           rdfs:range :Customer ,
+                      :StaffMember .
+
+
+###  http://www.sementicweb.org/bank_ontology#hasService
+:hasService rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :hasBankingActivity ;
+            owl:inverseOf :isServiceOf ;
+            rdfs:domain :Bank ;
+            rdfs:range :Service .
+
+
+###  http://www.sementicweb.org/bank_ontology#hasStaffMember
+:hasStaffMember rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :hasPerson ;
+                owl:inverseOf :isStaffMemberOf ;
+                rdfs:domain :Bank ;
+                rdfs:range :StaffMember .
+
+
+###  http://www.sementicweb.org/bank_ontology#isAccountOf
+:isAccountOf rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :isBankingActivityOf ;
+             rdfs:domain :Account ;
+             rdfs:range :Bank .
+
+
+###  http://www.sementicweb.org/bank_ontology#isBankTypeOf
+:isBankTypeOf rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :BankType ;
+              rdfs:range :Bank .
+
+
+###  http://www.sementicweb.org/bank_ontology#isBankingActivityOf
+:isBankingActivityOf rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     rdfs:domain :Account ,
+                                 :ElectronicCard ,
+                                 :Service ;
+                     rdfs:range :Bank .
+
+
+###  http://www.sementicweb.org/bank_ontology#isCustomerOf
+:isCustomerOf rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :isPersonOf ;
+              rdfs:domain :Customer ;
+              rdfs:range :Bank .
+
+
+###  http://www.sementicweb.org/bank_ontology#isElectronicCardOf
+:isElectronicCardOf rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :isBankingActivityOf ;
+                    rdfs:domain :ElectronicCard ;
+                    rdfs:range :Bank .
+
+
+###  http://www.sementicweb.org/bank_ontology#isPersonOf
+:isPersonOf rdf:type owl:ObjectProperty ;
+            rdfs:domain :Customer ,
+                        :StaffMember ;
+            rdfs:range :Bank .
+
+
+###  http://www.sementicweb.org/bank_ontology#isServiceOf
+:isServiceOf rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :isBankingActivityOf ;
+             rdfs:domain :Service ;
+             rdfs:range :Bank .
+
+
+###  http://www.sementicweb.org/bank_ontology#isStaffMemberOf
+:isStaffMemberOf rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :isPersonOf ;
+                 rdfs:domain :StaffMember ;
+                 rdfs:range :Bank .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.sementicweb.org/bank_ontology#acc_balance
+:acc_balance rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Account ;
+             rdfs:range xsd:double .
+
+
+###  http://www.sementicweb.org/bank_ontology#account_id
+:account_id rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Account ;
+            rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#address
+:address rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Customer ,
+                     :StaffMember ;
+         rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#card_id
+:card_id rdf:type owl:DatatypeProperty ;
+         rdfs:domain :ElectronicCard ;
+         rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#card_type
+:card_type rdf:type owl:DatatypeProperty ;
+           rdfs:domain :ElectronicCard ;
+           rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#customer_id
+:customer_id rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Customer ;
+             rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#email
+:email rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Customer ,
+                   :StaffMember ;
+       rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#employee_id
+:employee_id rdf:type owl:DatatypeProperty ;
+             rdfs:domain :StaffMember ;
+             rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#first_name
+:first_name rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Customer ,
+                        :StaffMember ;
+            rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#gender
+:gender rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Customer ,
+                    :StaffMember ;
+        rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#last_name
+:last_name rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Customer ,
+                       :StaffMember ;
+           rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#location
+:location rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Bank ,
+                      :Kiosk ;
+          rdfs:range xsd:float .
+
+
+###  http://www.sementicweb.org/bank_ontology#marital_status
+:marital_status rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Customer ,
+                            :StaffMember ;
+                rdfs:range xsd:boolean .
+
+
+###  http://www.sementicweb.org/bank_ontology#nic_no
+:nic_no rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Customer ,
+                    :StaffMember ;
+        rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#service_id
+:service_id rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Service ;
+            rdfs:range xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#service_terms
+:service_terms rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Service ;
+               rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.sementicweb.org/bank_ontology#ATM
+:ATM rdf:type owl:Class ;
+     rdfs:subClassOf :Kiosk .
+
+
+###  http://www.sementicweb.org/bank_ontology#Account
+:Account rdf:type owl:Class .
+
+
+###  http://www.sementicweb.org/bank_ontology#AccountHolder
+:AccountHolder rdf:type owl:Class ;
+               rdfs:subClassOf :Customer ;
+               owl:disjointWith :Non-AccountHolder .
+
+
+###  http://www.sementicweb.org/bank_ontology#Bank
+:Bank rdf:type owl:Class .
+
+
+###  http://www.sementicweb.org/bank_ontology#BankType
+:BankType rdf:type owl:Class .
+
+
+###  http://www.sementicweb.org/bank_ontology#BillSettlementService
+:BillSettlementService rdf:type owl:Class ;
+                       rdfs:subClassOf :Service .
+
+
+###  http://www.sementicweb.org/bank_ontology#BranchManager
+:BranchManager rdf:type owl:Class ;
+               rdfs:subClassOf :NamedPersonal ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :hasStaffMember ;
+                                 owl:allValuesFrom :ManagerialStaffMember
+                               ] .
+
+
+###  http://www.sementicweb.org/bank_ontology#BusinessPlusAccount
+:BusinessPlusAccount rdf:type owl:Class ;
+                     rdfs:subClassOf :NamedAccount ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasElectronicCard ;
+                                       owl:someValuesFrom :CreditCard
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasAccount ;
+                                       owl:allValuesFrom :CurrentAccount
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasCustomer ;
+                                       owl:allValuesFrom :AccountHolder
+                                     ] .
+
+
+###  http://www.sementicweb.org/bank_ontology#CDM
+:CDM rdf:type owl:Class ;
+     rdfs:subClassOf :Kiosk .
+
+
+###  http://www.sementicweb.org/bank_ontology#Cashier
+:Cashier rdf:type owl:Class ;
+         rdfs:subClassOf :NamedPersonal ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasStaffMember ;
+                           owl:allValuesFrom :ClarkStaffMember
+                         ] .
+
+
+###  http://www.sementicweb.org/bank_ontology#ClarkStaffMember
+:ClarkStaffMember rdf:type owl:Class ;
+                  rdfs:subClassOf :StaffMember ;
+                  owl:disjointWith :ManagerialStaffMember ,
+                                   :MinorStaffMember .
+
+
+###  http://www.sementicweb.org/bank_ontology#CommercialBank
+:CommercialBank rdf:type owl:Class ;
+                rdfs:subClassOf :BankType ;
+                owl:disjointWith :InvetmentBank ,
+                                 :SavingsAndLoanAssociation .
+
+
+###  http://www.sementicweb.org/bank_ontology#CreditCard
+:CreditCard rdf:type owl:Class ;
+            rdfs:subClassOf :ElectronicCard ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :isElectronicCardOf ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass :Account
+                            ] ;
+            owl:disjointWith :DebitCard .
+
+
+###  http://www.sementicweb.org/bank_ontology#CurrencyExchangeService
+:CurrencyExchangeService rdf:type owl:Class ;
+                         rdfs:subClassOf :Service .
+
+
+###  http://www.sementicweb.org/bank_ontology#CurrentAccount
+:CurrentAccount rdf:type owl:Class ;
+                rdfs:subClassOf :Account ;
+                owl:disjointWith :FixedAccount ,
+                                 :SavingsAccount .
+
+
+###  http://www.sementicweb.org/bank_ontology#CurrentAccountHolder
+:CurrentAccountHolder rdf:type owl:Class ;
+                      owl:equivalentClass [ owl:intersectionOf ( :Bank
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasElectronicCard ;
+                                                                   owl:someValuesFrom :ElectronicCard
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasAccount ;
+                                                                   owl:allValuesFrom :CurrentAccount
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasCustomer ;
+                                                                   owl:allValuesFrom :AccountHolder
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                      rdfs:comment "CurrentAccountHolder is a customer of the bank , have Current Account and have Electronic Card" .
+
+
+###  http://www.sementicweb.org/bank_ontology#Customer
+:Customer rdf:type owl:Class .
+
+
+###  http://www.sementicweb.org/bank_ontology#DebitCard
+:DebitCard rdf:type owl:Class ;
+           rdfs:subClassOf :ElectronicCard ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :isElectronicCardOf ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Account
+                           ] .
+
+
+###  http://www.sementicweb.org/bank_ontology#ElectronicCard
+:ElectronicCard rdf:type owl:Class .
+
+
+###  http://www.sementicweb.org/bank_ontology#FastLoan
+:FastLoan rdf:type owl:Class ;
+          rdfs:subClassOf :NamedService ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasAccount ;
+                            owl:someValuesFrom :Account
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasCustomer ;
+                            owl:someValuesFrom :Customer
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasService ;
+                            owl:allValuesFrom :LoanService
+                          ] .
+
+
+###  http://www.sementicweb.org/bank_ontology#FixedAccount
+:FixedAccount rdf:type owl:Class ;
+              rdfs:subClassOf :Account ;
+              owl:disjointWith :SavingsAccount .
+
+
+###  http://www.sementicweb.org/bank_ontology#FourteenPlusAccount
+:FourteenPlusAccount rdf:type owl:Class ;
+                     rdfs:subClassOf :NamedAccount ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasElectronicCard ;
+                                       owl:someValuesFrom :DebitCard
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasAccount ;
+                                       owl:allValuesFrom :SavingsAccount
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasCustomer ;
+                                       owl:allValuesFrom :AccountHolder
+                                     ] .
+
+
+###  http://www.sementicweb.org/bank_ontology#GoldTresure
+:GoldTresure rdf:type owl:Class ;
+             rdfs:subClassOf :NamedService ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasCustomer ;
+                               owl:someValuesFrom :Customer
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasService ;
+                               owl:allValuesFrom :PawningService
+                             ] .
+
+
+###  http://www.sementicweb.org/bank_ontology#InvetmentBank
+:InvetmentBank rdf:type owl:Class ;
+               rdfs:subClassOf :BankType ;
+               owl:disjointWith :SavingsAndLoanAssociation .
+
+
+###  http://www.sementicweb.org/bank_ontology#Kiosk
+:Kiosk rdf:type owl:Class .
+
+
+###  http://www.sementicweb.org/bank_ontology#LoanRecever
+:LoanRecever rdf:type owl:Class ;
+             owl:equivalentClass [ owl:intersectionOf ( :Bank
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :hasAccount ;
+                                                          owl:someValuesFrom :Account
+                                                        ]
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :hasCustomer ;
+                                                          owl:someValuesFrom :Customer
+                                                        ]
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :hasService ;
+                                                          owl:allValuesFrom :LoanService
+                                                        ]
+                                                      ) ;
+                                   rdf:type owl:Class
+                                 ] ;
+             rdfs:comment "LoanRecever is Customer of bank , has account , and take loan service" .
+
+
+###  http://www.sementicweb.org/bank_ontology#LoanService
+:LoanService rdf:type owl:Class ;
+             rdfs:subClassOf :Service .
+
+
+###  http://www.sementicweb.org/bank_ontology#Manager
+:Manager rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( :Bank
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasStaffMember ;
+                                                      owl:allValuesFrom :ManagerialStaffMember
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
+         rdfs:comment "Manager is a managerial staff member" .
+
+
+###  http://www.sementicweb.org/bank_ontology#ManagerialStaffMember
+:ManagerialStaffMember rdf:type owl:Class ;
+                       rdfs:subClassOf :StaffMember ;
+                       owl:disjointWith :MinorStaffMember .
+
+
+###  http://www.sementicweb.org/bank_ontology#MinorStaffMember
+:MinorStaffMember rdf:type owl:Class ;
+                  rdfs:subClassOf :StaffMember .
+
+
+###  http://www.sementicweb.org/bank_ontology#NamedAccount
+:NamedAccount rdf:type owl:Class ;
+              rdfs:subClassOf :Bank .
+
+
+###  http://www.sementicweb.org/bank_ontology#NamedPersonal
+:NamedPersonal rdf:type owl:Class ;
+               rdfs:subClassOf :Bank .
+
+
+###  http://www.sementicweb.org/bank_ontology#NamedService
+:NamedService rdf:type owl:Class ;
+              rdfs:subClassOf :Bank .
+
+
+###  http://www.sementicweb.org/bank_ontology#Non-AccountHolder
+:Non-AccountHolder rdf:type owl:Class ;
+                   rdfs:subClassOf :Customer .
+
+
+###  http://www.sementicweb.org/bank_ontology#PawningPerson
+:PawningPerson rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :Bank
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasCustomer ;
+                                                            owl:someValuesFrom :Customer
+                                                          ]
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasService ;
+                                                            owl:allValuesFrom :PawningService
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:comment "PawinigPerson is a customer of bank, take pawining service" .
+
+
+###  http://www.sementicweb.org/bank_ontology#PawningService
+:PawningService rdf:type owl:Class ;
+                rdfs:subClassOf :Service .
+
+
+###  http://www.sementicweb.org/bank_ontology#SavingsAccount
+:SavingsAccount rdf:type owl:Class ;
+                rdfs:subClassOf :Account .
+
+
+###  http://www.sementicweb.org/bank_ontology#SavingsAccountHolder
+:SavingsAccountHolder rdf:type owl:Class ;
+                      owl:equivalentClass [ owl:intersectionOf ( :Bank
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasElectronicCard ;
+                                                                   owl:someValuesFrom :ElectronicCard
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasAccount ;
+                                                                   owl:allValuesFrom :SavingsAccount
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasCustomer ;
+                                                                   owl:allValuesFrom :AccountHolder
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                      rdfs:comment "SavingsAccountHolder is a customer of the bank , have Savings Account and have Electronic Card" .
+
+
+###  http://www.sementicweb.org/bank_ontology#SavingsAndLoanAssociation
+:SavingsAndLoanAssociation rdf:type owl:Class ;
+                           rdfs:subClassOf :BankType .
+
+
+###  http://www.sementicweb.org/bank_ontology#Service
+:Service rdf:type owl:Class .
+
+
+###  http://www.sementicweb.org/bank_ontology#StaffMember
+:StaffMember rdf:type owl:Class .
+
+
+###  http://www.sementicweb.org/bank_ontology#WorkingEmployee
+:WorkingEmployee rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :Bank
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :hasStaffMember ;
+                                                              owl:allValuesFrom :ClarkStaffMember
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:comment "WorkingEmployee is a Clark Staff Member" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.sementicweb.org/bank_ontology#Account_01
+:Account_01 rdf:type owl:NamedIndividual ,
+                     :Account ;
+            :hasCustomer :cusromer_01 ;
+            :hasElectronicCard :card_01 ;
+            :acc_balance "1000000.0"^^xsd:double ;
+            :account_id "SAV001"^^xsd:string ;
+            :customer_id "001"^^xsd:string ,
+                         "CREDIT001"^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#Account_02
+:Account_02 rdf:type owl:NamedIndividual ,
+                     :Account ;
+            :hasCustomer :customer_04 ;
+            :hasElectronicCard :card_02 ;
+            :acc_balance "500000.0"^^xsd:double ;
+            :account_id "SAV002"^^xsd:string ;
+            :card_id "CREDIT002"^^xsd:string ;
+            :customer_id "004"^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#Account_03
+:Account_03 rdf:type owl:NamedIndividual ,
+                     :Account ;
+            :hasCustomer :customer_02 ;
+            :hasElectronicCard :card_03 ;
+            :acc_balance "560000.0"^^xsd:double ;
+            :account_id "CURR001"^^xsd:string ;
+            :card_id "DEBIT001"^^xsd:string ;
+            :customer_id "002"^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#Employee_01
+:Employee_01 rdf:type owl:NamedIndividual ,
+                      :StaffMember ;
+             :email "kasunbandara@gmail.com"^^xsd:string ;
+             :employee_id "EMP001"^^xsd:string ;
+             :first_name "Kasun"^^xsd:string ;
+             :gender "M"^^xsd:string ;
+             :last_name "Bandara"^^xsd:string ;
+             :marital_status "true"^^xsd:boolean .
+
+
+###  http://www.sementicweb.org/bank_ontology#Employee_02
+:Employee_02 rdf:type owl:NamedIndividual ,
+                      :StaffMember ;
+             :email "upekagunathilaka@gmail.com"^^xsd:string ;
+             :employee_id "EMP002"^^xsd:string ;
+             :first_name "Upeka"^^xsd:string ;
+             :gender "F"^^xsd:string ;
+             :last_name "Gunathilaka"^^xsd:string ;
+             :marital_status "true"^^xsd:boolean .
+
+
+###  http://www.sementicweb.org/bank_ontology#card_01
+:card_01 rdf:type owl:NamedIndividual ,
+                  :ElectronicCard ;
+         :hasAccount :Account_01 ;
+         :hasCustomer :cusromer_01 ;
+         :account_id "SAV001"^^xsd:string ;
+         :card_id "CREDIT001"^^xsd:string ;
+         :customer_id "001"^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#card_02
+:card_02 rdf:type owl:NamedIndividual ,
+                  :ElectronicCard ;
+         :hasAccount :Account_02 ;
+         :hasCustomer :customer_04 ;
+         :account_id "SAV002"^^xsd:string ;
+         :card_id "CREDIT002"^^xsd:string ;
+         :customer_id "004"^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#card_03
+:card_03 rdf:type owl:NamedIndividual ,
+                  :ElectronicCard ;
+         :hasAccount :Account_03 ;
+         :hasCustomer :customer_02 ;
+         :account_id "CURR001"^^xsd:string ;
+         :card_id "DEBIT001"^^xsd:string ;
+         :customer_id "002"^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#cusromer_01
+:cusromer_01 rdf:type owl:NamedIndividual ,
+                      :Customer ;
+             :hasAccount :Account_01 ;
+             :hasElectronicCard :card_01 ;
+             :account_id "SAV001"^^xsd:string ;
+             :card_id "CREDIT001"^^xsd:string ;
+             :customer_id "001"^^xsd:string ;
+             :email "nimalsirisena@gmail.com"^^xsd:string ;
+             :first_name "Nimal"^^xsd:string ;
+             :gender "M"^^xsd:string ;
+             :last_name "Sirisena"^^xsd:string ;
+             :marital_status "true"^^xsd:boolean ;
+             :service_id ""^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#customer_02
+:customer_02 rdf:type owl:NamedIndividual ,
+                      :Customer ;
+             :hasAccount :Account_03 ;
+             :hasElectronicCard :card_03 ;
+             :account_id "CURR001"^^xsd:string ;
+             :card_id "DEBIT001"^^xsd:string ;
+             :customer_id "002"^^xsd:string ;
+             :email "sunilkarunarathna@gmail.com"^^xsd:string ;
+             :first_name "Sunil"^^xsd:string ;
+             :gender "M"^^xsd:string ;
+             :last_name "Karunarathna"^^xsd:string ;
+             :marital_status "false"^^xsd:boolean ;
+             :service_id ""^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#customer_03
+:customer_03 rdf:type owl:NamedIndividual ,
+                      :Customer ;
+             :hasService :pawning_01 ;
+             :account_id ""^^xsd:string ;
+             :card_id ""^^xsd:string ;
+             :customer_id "003"^^xsd:string ;
+             :email "amaliperera@gmail.com"^^xsd:string ;
+             :first_name "Amali"^^xsd:string ;
+             :gender "F"^^xsd:string ;
+             :last_name "Perera"^^xsd:string ;
+             :marital_status "true"^^xsd:boolean ;
+             :service_id "PAW001"^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#customer_04
+:customer_04 rdf:type owl:NamedIndividual ,
+                      :Customer ;
+             :hasAccount :Account_02 ;
+             :hasElectronicCard :card_02 ;
+             :hasService :loan_01 ;
+             :account_id "SAV002"^^xsd:string ;
+             :card_id "CREDIT002"^^xsd:string ;
+             :customer_id "004"^^xsd:string ;
+             :email "kamalafernando@gmail.com"^^xsd:string ;
+             :first_name "Kamala"^^xsd:string ;
+             :gender "F"^^xsd:string ;
+             :last_name "Fernamdo"^^xsd:string ;
+             :marital_status "false"^^xsd:boolean ;
+             :service_id "LON001"^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#loan_01
+:loan_01 rdf:type owl:NamedIndividual ,
+                  :LoanService ;
+         :hasCustomer :customer_04 ;
+         :hasService :loan_01 ;
+         :customer_id "004"^^xsd:string ;
+         :service_id "LON001"^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#pawning_01
+:pawning_01 rdf:type owl:NamedIndividual ,
+                     :PawningService ;
+            :hasCustomer :customer_03 ;
+            :hasService :pawning_01 ;
+            :customer_id "003"^^xsd:string ;
+            :service_id "PAW001"^^xsd:string .
+
+
+###  http://www.sementicweb.org/bank_ontology#service_point_01
+:service_point_01 rdf:type owl:NamedIndividual ,
+                           :Kiosk .
+
+
+###  http://www.sementicweb.org/bank_ontology#service_point_02
+:service_point_02 rdf:type owl:NamedIndividual ,
+                           :Kiosk .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BillSettlementService
+                :CurrencyExchangeService
+                :LoanService
+                :PawningService
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
